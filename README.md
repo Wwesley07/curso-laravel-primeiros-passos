@@ -39,7 +39,11 @@ Route::get('/usuarios', function () {
 
 * --------------------------------------------------------------------------
 * Episódios 14,15 e 16: Introdução aos Controllers (Controladores)
+<<<<<<< HEAD
  O projeto passou por uma grande evolução arquitetural. Deixa - se de gerenciar as respostas direto pelo sistema e transferirmos para os *Controllers* e adotando o padrão para **MVC Model-View-Controller).
+=======
+Neste módulo, o projeto passou por uma grande evolução arquitetural. Deixa - se de gerenciar as respostas direto pelo sistema e transferirmos para os *Controllers* e adotando o padrão para **MVC Model-View-Controller).
+>>>>>>> 39826849e0c530383c6fbf83b0d601d5913f0d31
 * ------------------------------------------------------------------------
 * 1 - Criando o Controlador via terminal (Artisan)
 * Para cirar a estrutura base de forma automática, é utiliziado: php artisan make:controller ProdutoController
