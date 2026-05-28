@@ -11,4 +11,9 @@ class ProdutoController extends BaseController
        $produtos = ['Carro', 'Casa', 'Notebook'];
        return view('produtos.index', compact('produtos'));
     }
+    public function show($id) {
+        $produtos = ['Carro', 'Casa', 'Notebook'];
+        $produto = $produtos[$id] ?? null;
+        return view('produtos.show', compact('produto'));
+    }
 }    

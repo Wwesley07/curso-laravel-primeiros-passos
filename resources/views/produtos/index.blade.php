@@ -1,6 +1,11 @@
 <h1>Listagem de Produtos</h1>
 
-<>
-    @foreach ($produtos as $produto)
-        <li>{{ $produto }}</li>
+<ul>
+    @foreach ($produtos as $key => $produto)
+        <li>
+            <a href="{{ route('produtos.show', ['id' => $key]) }}">
+                Ver {{ $produto }}
+            </a>
+        </li>
     @endforeach
+</ul>
