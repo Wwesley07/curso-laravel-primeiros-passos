@@ -2,7 +2,7 @@
 * --------------------------------------------------------------------------
 * Rotas de Produtos - Módulo de Vendas 
 * --------------------------------------------------------------------------
-* * Este bloco gerencia a exibição e os filtros de produtos do sistema.
+* * Este bloco a seguir gerencia e representa a exibição e os filtros de produtos do sistema.
 * Correspodente aos episódios 11 e 12 do curso(cursolaravel) no Youtube.
 * */
 
@@ -48,6 +48,7 @@ Neste módulo, o projeto passou por uma grande evolução arquitetural. Deixa - 
 * 1 - Criando o Controlador via terminal (Artisan)
 * Para cirar a estrutura base de forma automática, é utiliziado: php artisan make:controller ProdutoController
 * 2 - Construindo a Lógica do Controlador (App/Http/Controllers/ProdutoController.php)
+PHP
 
 <?php
 namespace App\Http\Controllers;
@@ -69,6 +70,8 @@ class ProdutoController extends BaseController
 }
 
 * 3 - Vinculando a Rota ao Controlador(Routes/web.php)
+PHP 
+
 <?php
 
 use Illuminate/Support/Facades/Route;
@@ -86,6 +89,8 @@ O Método View;
 A função Compact
 @foreach
 * 1. O controlador('app/Http/Controller.php')
+PHP
+
 <?php
 
 namespace App\Http\Controllers;
@@ -104,6 +109,8 @@ class ProdutoController extends BaseController
     }
 }
 * 2. A View Renderizando Dinamicamente(resources/views/produtos;index.blade.php)
+HTML
+
 <h1>Listagem de Produtos</h1>
 
 <ul>
@@ -117,3 +124,63 @@ OBS: Erros que houveram no processo.
 * InvalidArgumentException: View [nome] not found: Foi solucionado e caminhando no return view('pasta.arquivo') com a localização real dos arquivos na árvore de diretórios do projeto.
 
 * ParseError / Syntax Error: Corrigido e trazendo o fechamento correto das tags de comentários e chaves de classes do PHP dentro do arquivo do controlador.
+* ----------------------------------------------------------------
+* Episódio 23: Foi feito a implementação dinâmica de produtos e foi criado uma navegação segura para a página de detalhes de cada item, utilizando parâmetros de URL, controladores e rotas nomeadas no Laravel.
+* 1. Rotas(Routes/web.php)
+PHP
+
+use App/Http/Controllers/ProdutoController;
+use Illuminate\Support\Facades\Route;
+ 
+// Rota para a Listagem principal
+Route::get('/produtos', [ProdutoController::class, 'index])->name('produtos.show');
+
+* 2. Controlador(app/Http/Controller/ProdutoController.php)
+PHP
+
+namespace App\Http\Controllers;
+ 
+use Illuminate\Routing\Controller as BaseController;
+
+class ProdutoController extends BaseController;
+{
+    // Lista todos os produtos
+    public function index()
+    {
+        $produtos = ['Carro', 'Casa', 'Notebook'];
+        return view('produtos.index', compact('produtos'));
+    }
+    // Mostra o produto específico com base no ID recebido pela URL
+    public function show($id)
+    {
+        $lista_produtos = ['Carro', 'Casa', 'Notebook'];
+
+        // Busca o item no array. Se não existir, retorna null
+        $produto = $lista_produtos[$id] ?? null;
+
+        return view('produtos.show', compact('produto'));
+    }
+}
+
+* 3. Views(resources/views/produtos/index.blade.php)
+HTML
+<h1>Listagem de Produtos</h1>
+
+@foreach ($produtos as $key => $produtos)
+   <li> 
+   <a href="{{ route('produtos.show', ['id' => $key]) }}">
+     Ver {{ $produtos }}
+  </a>
+  </li>
+  @endforeach
+</ul>
+  
+* OBS: Detalhes(resources/views/produtos/show.blade.php)
+HTML
+
+<h1>Detalhes do Produto</h1>
+@if($produto)
+ <p>O produto selecionado foi: <strong>{{ $produto }}</strong></p>
+@else
+  <p>Produto não encontrado.</p>
+  @endif
