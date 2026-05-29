@@ -8,11 +8,11 @@ use Illuminate\Routing\Controller as BaseController;
 class ProdutoController extends BaseController
 {
     public function index() {
-       $produtos = ['Carro', 'Casa', 'Notebook'];
+       $produtos = ['Laravel', 'PHP', 'Python', 'JavaScript', 'Java', 'C', 'C#', 'Cobol', 'Rust', 'Go'];
        return view('produtos.index', compact('produtos'));
     }
     public function show($id) {
-        $produtos = ['Carro', 'Casa', 'Notebook'];
+        $produtos = ['Laravel', 'PHP', 'Python', 'JavaScript', 'Java', 'C', 'C#', 'Cobol', 'Rust', 'Go'];
         $produto = $produtos[$id] ?? null;
         return view('produtos.show', compact('produto'));
     }

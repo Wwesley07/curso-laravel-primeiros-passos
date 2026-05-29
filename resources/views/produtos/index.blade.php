@@ -1,4 +1,4 @@
-<h1>Listagem de Produtos</h1>
+<h1>Lista de dicas para estudos</h1>
 
 <ul>
     @foreach ($produtos as $key => $produto)
